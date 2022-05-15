@@ -82,8 +82,16 @@ pub mod object_capabilities {
 pub mod token_capabilities {
     use std::{fs, io, path};
 
+    use crate::Capability;
+
     pub struct IO {
         _private: (),
+    }
+
+    impl Capability for IO {
+        unsafe fn construct() -> Self {
+            Self { _private: () }
+        }
     }
 
     pub fn write_file(
