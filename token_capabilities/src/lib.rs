@@ -4,13 +4,11 @@ pub mod io {
 
     use std::{io, path};
 
-    use crate::Capability;
-
     pub struct IO {
         pub(crate) _private: (),
     }
 
-    impl Capability for IO {
+    impl prelude::Capability for IO {
         unsafe fn construct() -> Self {
             Self { _private: () }
         }
@@ -31,6 +29,4 @@ pub mod io {
     pub fn stdin(_token: IO) -> std::io::Stdin {
         std::io::stdin()
     }
-
-    
 }

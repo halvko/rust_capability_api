@@ -1,3 +1,9 @@
 [workspace]
 
-members = ["capability_api", "object_diecup", "object_entrypoint"]
+members = [
+    "object_capabilities",
+    "object_diecup",
+    "object_entrypoint",
+    "prelude",
+    "token_capabilities",
+]

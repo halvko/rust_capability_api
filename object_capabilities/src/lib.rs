@@ -1,6 +1,6 @@
 use std::{fs, io as stdio, path::Path};
 
-use crate::Capability;
+use prelude::*;
 
 pub struct Stdout {
     _private: (),

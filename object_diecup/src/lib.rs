@@ -1,5 +1,5 @@
-use capability_api::object_capabilities::{self as object_capabilities, AuthErr, Operation};
-use capability_api::*;
+use capabilities::{self, AuthErr, Operation};
+use prelude::*;
 use rand::prelude::*;
 
 pub struct DieCup<F>
@@ -8,14 +8,14 @@ where
 {
     dies: Vec<u8>,
     size: u8,
-    io: object_capabilities::TempIO<F>,
+    io: capabilities::TempIO<F>,
 }
 
 impl<F> DieCup<F>
 where
     F: FnMut(Operation) -> bool,
 {
-    pub fn new(io: object_capabilities::TempIO<F>, count: usize, size: u8) -> DieCup<F> {
+    pub fn new(io: capabilities::TempIO<F>, count: usize, size: u8) -> DieCup<F> {
         let mut rng = thread_rng();
         DieCup {
             size,
@@ -53,7 +53,7 @@ pub struct PrintErr;
 
 impl error::Error for PrintErr {}
 
-impl Display for PrintErr {
+impl fmt::Display for PrintErr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Could not print diecup.")
     }

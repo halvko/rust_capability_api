@@ -1,5 +1,5 @@
-use capability_api::object_capabilities::{Operation, TempIO, IO};
-use capability_api::*;
+use capabilities::{Operation, TempIO, IO};
+use prelude::*;
 fn main() {
     let mut print_count = 0;
     let io = TempIO::new(unsafe { IO::construct() }, |o| match o {
