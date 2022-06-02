@@ -62,6 +62,7 @@ pub enum Operation<'call> {
     WriteFile(&'call dyn AsRef<Path>, &'call dyn AsRef<[u8]>),
     ReadFile(&'call dyn AsRef<Path>),
     StdIn,
+    StdOut(&'call str),
 }
 
 impl<F> TempIO<F>
@@ -93,6 +94,13 @@ where
     pub fn stdin(&mut self) -> AuthResult<stdio::Stdin> {
         if (self.authorizor)(Operation::StdIn) {
             return Ok(self.stdio.stdin());
+        }
+        Err(AuthErr)
+    }
+
+    pub fn stdout(&mut self, str: &str) -> AuthResult<()> {
+        if (self.authorizor)(Operation::StdOut(str)) {
+            return Ok(self.stdio.stdout(str));
         }
         Err(AuthErr)
     }
