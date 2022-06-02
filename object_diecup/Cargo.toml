@@ -6,6 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-capabilities = { path = "../object_capabilities" }
+object_capabilities = { path = "../object_capabilities" }
 prelude = { path = "../prelude" }
 rand = "0.8.5"

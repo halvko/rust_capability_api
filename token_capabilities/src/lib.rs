@@ -4,6 +4,7 @@ pub mod io {
 
     use std::{io, path};
 
+    #[derive(Copy, Clone)]
     pub struct IO {
         pub(crate) _private: (),
     }
@@ -29,4 +30,34 @@ pub mod io {
     pub fn stdin(_token: IO) -> std::io::Stdin {
         std::io::stdin()
     }
+
+    #[macro_export]
+    macro_rules! println {
+        ($cap:tt) => {{
+           fn c(_: $crate::io::IO){}
+            c($cap);
+            std::println!()
+        }};
+        ($cap:tt, $($arg:tt)*) => {{
+           fn c(_: $crate::io::IO){}
+           c($cap);
+           std::println!($($arg)*)
+        }}
+    }
+    pub use crate::println;
+
+    #[macro_export]
+    macro_rules! print {
+        ($cap:tt) => {{
+           fn c(_: $crate::io::IO){}
+            c($cap);
+            std::print!()
+        }};
+        ($cap:tt, $($arg:tt)*) => {{
+           fn c(_: $crate::io::IO){}
+           c($cap);
+           std::print!($($arg)*)
+        }}
+    }
+    pub use crate::print;
 }

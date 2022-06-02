@@ -6,4 +6,6 @@ members = [
     "object_entrypoint",
     "prelude",
     "token_capabilities",
+    "token_diecup",
+    "token_entrypoint",
 ]

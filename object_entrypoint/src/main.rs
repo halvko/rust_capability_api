@@ -1,4 +1,4 @@
-use capabilities::{Operation, TempIO, IO};
+use object_capabilities::{Operation, TempIO, IO};
 use prelude::*;
 fn main() {
     let mut print_count = 0;

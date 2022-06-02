@@ -1,25 +1,23 @@
-use object_capabilities::{self as capabilities, AuthErr, Operation};
-use prelude::*;
 use rand::prelude::*;
 
-pub struct DieCup<F>
+pub struct DieCup<F, R>
 where
-    F: FnMut(Operation) -> bool,
+    F: FnMut(&str) -> R,
 {
     dies: Vec<u8>,
     size: u8,
-    io: capabilities::TempIO<F>,
+    printer: F,
 }
 
-impl<F> DieCup<F>
+impl<F, R> DieCup<F, R>
 where
-    F: FnMut(Operation) -> bool,
+    F: FnMut(&str) -> R,
 {
-    pub fn new(io: capabilities::TempIO<F>, count: usize, size: u8) -> DieCup<F> {
+    pub fn new(printer: F, count: usize, size: u8) -> DieCup<F, R> {
         let mut rng = thread_rng();
         DieCup {
             size,
-            io,
+            printer,
             dies: (0..count).map(|_| rng.gen_range(1..=size)).collect(),
         }
     }
@@ -31,7 +29,7 @@ where
             .for_each(|i| *i = rng.gen_range(1..=self.size))
     }
 
-    pub fn print(&mut self) -> Result<(), PrintErr> {
+    pub fn print(&mut self) -> R {
         let str = if let Some(d) = self.dies.get(0) {
             let mut str = format!("Diecup contains: {d}");
             for e in self.dies.iter().skip(1) {
@@ -43,24 +41,6 @@ where
             format!("Diecup is empty.")
         };
 
-        self.io.stdout(&str)?;
-        Ok(())
-    }
-}
-
-#[derive(Debug)]
-pub struct PrintErr;
-
-impl error::Error for PrintErr {}
-
-impl fmt::Display for PrintErr {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Could not print diecup.")
-    }
-}
-
-impl From<AuthErr> for PrintErr {
-    fn from(_: AuthErr) -> Self {
-        Self
+        (self.printer)(&str)
     }
 }

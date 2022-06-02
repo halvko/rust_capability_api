@@ -1,5 +1,5 @@
 [package]
-name = "token_capabilities"
+name = "token_entrypoint"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 prelude = { path = "../prelude" }
+token_capabilities = { path = "../token_capabilities" }
+token_diecup = { path = "../token_diecup" }
