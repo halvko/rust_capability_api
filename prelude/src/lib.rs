@@ -1,4 +1,5 @@
 pub trait Capability {
+    #[allow(clippy::missing_safety_doc)]
     unsafe fn construct() -> Self;
 }
 

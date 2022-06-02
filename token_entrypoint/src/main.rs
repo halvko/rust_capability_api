@@ -1,5 +1,5 @@
 use prelude::*;
-use token_capabilities::io::{print, println, IO};
+use token_capabilities::io::{print, IO};
 use token_diecup as diecup;
 
 fn main() {

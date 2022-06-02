@@ -40,7 +40,7 @@ where
             str.push('\n');
             str
         } else {
-            format!("Diecup is empty.")
+            "Diecup is empty.".to_string()
         };
 
         self.io.stdout(&str)?;

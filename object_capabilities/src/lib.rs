@@ -100,6 +100,7 @@ where
 
     pub fn stdout(&mut self, str: &str) -> AuthResult<()> {
         if (self.authorizor)(Operation::StdOut(str)) {
+            #[allow(clippy::unit_arg)]
             return Ok(self.stdio.stdout(str));
         }
         Err(AuthErr)
