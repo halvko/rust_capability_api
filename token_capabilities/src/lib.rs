@@ -4,6 +4,8 @@ pub mod io {
 
     use std::{io, path};
 
+    pub use io::Result;
+
     #[derive(Copy, Clone)]
     pub struct IO {
         pub(crate) _private: (),
