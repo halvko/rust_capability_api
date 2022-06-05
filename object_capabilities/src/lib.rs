@@ -54,7 +54,7 @@ where
     F: FnMut(Operation) -> bool,
 {
     stdio: IO,
-    authorizor: F,
+    authorizer: F,
 }
 
 #[non_exhaustive]
@@ -69,8 +69,8 @@ impl<F> TempIO<F>
 where
     F: FnMut(Operation) -> bool,
 {
-    pub fn new(stdio: IO, authorizor: F) -> Self {
-        Self { stdio, authorizor }
+    pub fn new(stdio: IO, authorizer: F) -> Self {
+        Self { stdio, authorizer }
     }
 
     pub fn write_file(
@@ -78,28 +78,28 @@ where
         path: impl AsRef<Path> + Clone,
         contents: impl AsRef<[u8]> + Clone,
     ) -> AuthResult<stdio::Result<()>> {
-        if (self.authorizor)(Operation::WriteFile(&path, &contents)) {
+        if (self.authorizer)(Operation::WriteFile(&path, &contents)) {
             return Ok(self.stdio.write_file(path, contents));
         }
         Err(AuthErr)
     }
 
     pub fn read_file(&mut self, path: impl AsRef<Path>) -> AuthResult<stdio::Result<Vec<u8>>> {
-        if (self.authorizor)(Operation::ReadFile(&path)) {
+        if (self.authorizer)(Operation::ReadFile(&path)) {
             return Ok(self.stdio.read_file(path));
         }
         Err(AuthErr)
     }
 
     pub fn stdin(&mut self) -> AuthResult<stdio::Stdin> {
-        if (self.authorizor)(Operation::StdIn) {
+        if (self.authorizer)(Operation::StdIn) {
             return Ok(self.stdio.stdin());
         }
         Err(AuthErr)
     }
 
     pub fn stdout(&mut self, str: &str) -> AuthResult<()> {
-        if (self.authorizor)(Operation::StdOut(str)) {
+        if (self.authorizer)(Operation::StdOut(str)) {
             #[allow(clippy::unit_arg)]
             return Ok(self.stdio.stdout(str));
         }
