@@ -1,3 +1,4 @@
+use facet_external::external;
 use prelude::*;
 use token_capabilities as std;
 
@@ -10,13 +11,4 @@ fn main() {
     let facet = |path: &str| io::read_file(path, io);
 
     external(facet)
-}
-
-fn external(f: impl Fn(&str) -> io::Result<Vec<u8>>) {
-    match f("/app/secret") {
-        Ok(_res) => {
-            // todo
-        }
-        Err(_) => return,
-    }
 }

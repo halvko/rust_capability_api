@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 prelude = { path = "../prelude" }
 token_capabilities = { path = "../token_capabilities" }
+facet_external = { path = "../facet_external" }
