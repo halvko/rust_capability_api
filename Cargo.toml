@@ -9,4 +9,5 @@ members = [
     "token_diecup",
     "token_entrypoint",
     "facet_entrypoint",
+    "facet_external",
 ]
