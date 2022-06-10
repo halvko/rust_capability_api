@@ -1,4 +1,6 @@
+use crate::std::io::{print, IO};
 use rand::prelude::*;
+use token_capabilities as std;
 
 pub struct DieCup<F, R>
 where
@@ -43,4 +45,9 @@ where
 
         (self.printer)(&str)
     }
+}
+
+pub fn printer(io: IO) -> impl Fn(&str) {
+    #[allow(unused_parens)]
+    move |s| print!((&io), "{s}")
 }

@@ -6,4 +6,6 @@ pub trait Capability {
 pub use std::error;
 pub mod fmt {
     pub use std::fmt::Display;
+    pub use std::fmt::Formatter;
+    pub use std::fmt::Result;
 }

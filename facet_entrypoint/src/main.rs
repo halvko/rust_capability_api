@@ -8,7 +8,7 @@ fn main() {
     let io = unsafe { io::IO::construct() };
 
     // This closure restricts io capabilities to read-only, akin to how the facet pattern does it.
-    let facet = |path: &str| io::read_file(path, io);
+    let facet = |path: &str| io::read_file(path, &io);
 
     external(facet)
 }

@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 token_capabilities = { path = "../token_capabilities" }
+prelude = { path = "../prelude" }
 rand = "0.8.5"

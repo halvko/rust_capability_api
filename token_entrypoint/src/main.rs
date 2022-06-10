@@ -7,7 +7,10 @@ fn main() {
     let io = unsafe { IO::construct() };
     let printer = |s: &str| {
         if print_count < 10 {
-            print!(io, "{}", s);
+            #[allow(unused_parens)]
+            {
+                print!((&io), "{}", s);
+            }
             print_count += 1;
             Ok(())
         } else {
