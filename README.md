@@ -26,10 +26,9 @@ source.
 
 # Running the code
 
-If a working rust toolchain is installed, these Crates can be run by, in their respective source. If
-a working rust toolchain is installed, these Crates can be run, in their respective directories
-running `cargo run`. This builds a debug build of the crate and all of its dependencies and runs
-it.
+If a working rust toolchain is installed, these Crates can be run, in their respective
+directories running `cargo run`. This builds a debug build of the crate and all of its
+dependencies and runs it.
 
 If a rust toolchain is not present, the recommended way of getting it is by going to
 (rustup.rs)[https://rustup.rs], and following the instructions.
